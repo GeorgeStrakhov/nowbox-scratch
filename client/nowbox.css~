@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+.centered {
+  text-align: center;
+}
+
+.searchContainer {
+  margin: 20px;
+}
+
+.addBoxStuff {
+  margin: 20px;
+}
+
+.allStuff {
+  margin-top: 20px;
+}
+
+.stuffPhoto {
+  max-width: 400px;
+  max-height: 400px;
+}

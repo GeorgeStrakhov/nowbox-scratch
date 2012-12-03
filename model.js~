@@ -1,0 +1,14 @@
+Boxes = new Meteor.Collection("boxes");
+
+/////////ALLOW////////////
+Boxes.allow({
+  insert: function (userId, party) {
+    return false; 
+  },
+  update: function (userId, parties, fields, modifier) {
+    return false;
+  },
+  remove: function (userId, parties) {
+    return false;
+  }
+});

@@ -1,0 +1,148 @@
+<head>
+  <title>NowBox</title>
+</head>
+
+<body>
+  {{> app}}
+</body>
+
+<template name="app">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <div class="pull-left">{{loginButtons}}</div>
+        {{#if currentUser}}{{#if currentBox}}
+          <div class="pull-right"><a href="/">home</a></div>
+        {{/if}}{{/if}}
+      </div>
+    </div>
+    {{#if currentUser}}
+      {{#if currentBox}}
+        {{>singleBox}}
+      {{else}}
+        <div class="row">
+          <div class="span12 centered">
+            <h3>My NowBoxes:</h3>
+          </div>
+        </div>
+        {{>addBox}}
+        {{>searchBox}}
+        <div class="allStuff">
+          {{#each myBoxes}}
+            {{>boxItem}}
+          {{/each}}
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="addBox">
+  <div class="addBoxContainer centered">
+    <button class="btn btn-large span12" id="showAddBox">+</button>
+    <div id="addBoxDiv" class="addBoxStuff hide">
+      <form>
+        <fieldset>
+          <div id="addNewBoxValidation" class="control-group">
+            <label>NowBox name:</label>
+            <input type="text" class="span12" id="newNowBoxName" placeholder="e.g. George's Party">
+            <span class="help-block">(Name of the NowBox you're tryiing to join or create)</span>
+          </div>
+          <button type="submit" class="btn span12" id="submitNew">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template name="searchBox">
+  <!--
+  <div id="searchDiv" class="searchContainer centered">
+    <form class="form-search">
+      <input type="text" class="input-medium search-query span12">
+      <button type="submit" class="btn span12" id="searchBtn"><i class="icon-search"></i></button>
+    </form>
+  </div>
+  -->
+</template>
+
+<template name="boxItem">
+  <div class="row">{{formattedModificationDate}}</div>
+  <div class="row well"><a href="#/nowbox/{{this._id}}">{{this.name}}</a></div>
+</template>
+
+<template name="singleBox">
+  <div class="row">
+    <div class="span12 centered nowBoxName">
+      <h3>{{currentBox.name}}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12 centered">
+      <button class="btn btn-large span12" id="showAddBox">+</button>
+      <div id="addStuffDiv" class="addBoxStuff hide">
+        <form>
+          <fieldset>
+            <div id="addStuffValidation" class="control-group">
+              <label>What do you want to add to this NowBox?</label>
+              <select id="newStuffType" class="span12">
+                <option>Photo</option>
+                <option>Video</option>
+                <option>Link</option>
+                <option>Thought</option>
+                <option>Question</option>
+                <option>Poll</option>
+                <option>Collaborator</option>
+              </select>
+              <div id="addPhotoForm" class="inputData">
+                <label>Url of the photo:</label>
+                <input type="text" class="input span12" id="newStuffPhoto"/>
+              </div>
+              <div id="addVideoForm" class="inputData hide">
+                <label>Url of the video:</label>
+                <input type="text" class="input span12" id="newStuffVideo"/>
+              </div>
+              <div id="addLinkForm" class="inputData hide">
+                <label>Url of the link:</label>
+                <input type="text" class="input span12" id="newStuffLink"/>
+              </div>
+              <div id="addThoughtForm" class="inputData hide">
+                <label>What do you think?</label>
+                <textarea id="newStuffThought" class="span12"></textarea>
+              </div>
+              <div id="addQuestionForm" class="inputData hide">
+                under construction...
+              </div>
+              <div id="addPollForm" class="inputData hide">
+                under construction...
+              </div>     
+              <div id="addCollaboratorForm" class="inputData hide">
+                <label>Email of the collaborator:</label>
+                <input type="text" class="input span12" id="newStuffCollaborator"/>
+              </div>       
+              <span class="help-block"></span>
+            </div>
+            <button type="submit" class="btn span12" id="submitNewThing">add</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12 centered">
+      {{>searchBox}}
+    </div>
+  </div>
+  <div class="allStuff">
+    {{#each allStuff}}
+      {{>stuffItem}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="stuffItem">
+  <div class="row">{{when}} : <em>{{userName}}</em></div>
+  <div class="row well">
+    {{{itemHtml}}}
+  </div>
+</template>
